@@ -32,9 +32,13 @@ Together, OpenCV and MediaPipe can be used to create powerful computer vision an
 
 ## Quick Install
 
-You need to install Raspberry Pi on your robot.
+### You need to install Raspberry Pi on your robot.
+
+[Raspberry Pi Imager](https://www.raspberrypi.com/software/)
 
 You can use this tutorial to upgrade your robot's upper computer program.
+
+    sudo apt update && sudo apt upgrade
 
 You can use this tutorial to install this program on a pure Raspberry Pi OS.
 
