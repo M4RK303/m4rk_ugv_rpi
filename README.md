@@ -47,7 +47,9 @@ You can clone this repository from M4RK303 GitHub to your local machine.
 ### Grant execution permission to the installation script
 
     cd ugv_rpi/
+
     sudo chmod +x setup.sh
+
     sudo chmod +x autorun.sh
 
 ### Install app
@@ -61,10 +63,15 @@ You can clone this repository from M4RK303 GitHub to your local machine.
 ### AccessPopup installation
 
     cd AccessPopup
+
     sudo chmod +x installconfig.sh
+
     sudo ./installconfig.sh
+
     *Input 1: Install AccessPopup
+
     *Press any key to exit
+
     *Input 9: Exit installconfig.sh
 
 ### Reboot Device
@@ -95,13 +102,15 @@ To access JupyterLab, use `[IP]:8888` (for example, `192.168.10.50:8888`).
 If the program fails to run and encounters errors related to v4l2.py during runtime, you need to delete v4l2.py from both the Python virtual environment and the user environment. This will allow the program to automatically use the system-wide v4l2.py.
 
     cd ugv_rpi/
+
     sudo rm ugv-env/lib/python3.11/site-packages/v4l2.py
+
     sudo rm /home/[your_user_name]/.local/lib/python3.11/site-packages/v4l2.py
 
 Now you can restart the main program app.py.
 
 # License
 
-ugv_rpi for the Raspberry Pi: an open source robotics platform for the Raspberry Pi. Copyright (C) 2024 [Waveshare](https://www.waveshare.com/)
+ugv_rpi for the Raspberry Pi: an open source robotics platform for the Raspberry Pi. Copyright (C) 2024
 
 ![](./media/m4rk_ugv_rpi_robot_2.png)
