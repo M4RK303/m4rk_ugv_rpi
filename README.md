@@ -2,7 +2,7 @@
 
 ugv robot raspberry pi5 camera module
 
-![](./media/m4rk_ugv_rpi_robot.jpg)
+![](./media/m4rk_ugv_rpi_robot_1.png)
 
 ## Basic Description
 
@@ -103,3 +103,5 @@ Now you can restart the main program app.py.
 # License
 
 ugv_rpi for the Raspberry Pi: an open source robotics platform for the Raspberry Pi. Copyright (C) 2024 [Waveshare](https://www.waveshare.com/)
+
+![](./media/m4rk_ugv_rpi_robot_2.png)
