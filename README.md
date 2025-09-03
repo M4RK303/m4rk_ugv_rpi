@@ -42,15 +42,19 @@ You can use this tutorial to install this program on a pure Raspberry Pi OS.
 
 You can clone this repository from M4RK303 GitHub to your local machine.
 
-##  git clone
+### git clone
 
-	 git clone https://github.com/M4RK303/m4rk_ugv_rpi
+     git clone https://github.com/M4RK303/m4rk_ugv_rpi
 
-### Grant execution permission to the installation script
+### Go to the directory ugv_rpi
 
     cd ugv_rpi/
 
+### Grant execution permission to the installation script setup.sh
+
     sudo chmod +x setup.sh
+
+### Grant execution permission to the installation script autorun.sh
 
     sudo chmod +x autorun.sh
 
@@ -62,20 +66,25 @@ You can clone this repository from M4RK303 GitHub to your local machine.
 
     ./autorun.sh
 
-### AccessPopup installation
-
+### Go to the directory AccessPopup
 
     cd AccessPopup
 
+### Grant execution permission to the installation script AccessPopup
+
     sudo chmod +x installconfig.sh
+
+### AccessPopup installation
 
     sudo ./installconfig.sh
 
-- *Input 1: Install AccessPopup
+### lection section 1 - 9
 
-- *Press any key to exit
+- \*Input 1: Install AccessPopup
 
-- *Input 9: Exit installconfig.sh
+- \*Press any key to exit
+
+- \*Input 9: Exit installconfig.sh
 
 ### Reboot Device
 
@@ -105,10 +114,8 @@ To access JupyterLab, use `[IP]:8888` (for example, `192.168.10.50:8888`).
 If the program fails to run and encounters errors related to v4l2.py during runtime, you need to delete v4l2.py from both the Python virtual environment and the user environment. This will allow the program to automatically use the system-wide v4l2.py.
 
     cd ugv_rpi/
--
-    sudo rm ugv-env/lib/python3.11/site-packages/v4l2.py
--
-    sudo rm /home/[your_user_name]/.local/lib/python3.11/site-packages/v4l2.py
+
+- sudo rm ugv-env/lib/python3.11/site-packages/v4l2.py - sudo rm /home/[your_user_name]/.local/lib/python3.11/site-packages/v4l2.py
 
 Now you can restart the main program app.py.
 
