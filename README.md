@@ -38,7 +38,7 @@ Together, OpenCV and MediaPipe can be used to create powerful computer vision an
 
 You can use this tutorial to upgrade your robot's upper computer program.
 
-    sudo apt update && sudo apt upgrade
+    sudo apt update && sudo apt upgrade -y
 
 You can use this tutorial to install this program on a pure Raspberry Pi OS.
 
