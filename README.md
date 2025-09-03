@@ -119,12 +119,14 @@ If the program fails to run and encounters errors related to v4l2.py during runt
 
     cd ugv_rpi/
 
-- sudo rm ugv-env/lib/python3.11/site-packages/v4l2.py - sudo rm /home/[your_user_name]/.local/lib/python3.11/site-packages/v4l2.py
+    sudo rm ugv-env/lib/python3.11/site-packages/v4l2.py
+
+    sudo rm /home/[your_user_name]/.local/lib/python3.11/site-packages/v4l2.py
 
 Now you can restart the main program app.py.
 
 # License
 
-ugv_rpi for the Raspberry Pi: an open source robotics platform for the Raspberry Pi. Copyright (C) 2024
+ugv_rpi for the Raspberry Pi: an open source robotics platform for the Raspberry Pi. Copyright (C) 2025 [Waveshare](https://www.waveshare.com/)
 
 ![](./media/m4rk_ugv_rpi_robot_2.png)
