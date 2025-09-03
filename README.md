@@ -42,7 +42,9 @@ You can use this tutorial to install this program on a pure Raspberry Pi OS.
 
 You can clone this repository from M4RK303 GitHub to your local machine.
 
-    git clone https://github.com/M4RK303/m4rk_ugv_rpi
+##  git clone
+
+	 git clone https://github.com/M4RK303/m4rk_ugv_rpi
 
 ### Grant execution permission to the installation script
 
@@ -62,11 +64,11 @@ You can clone this repository from M4RK303 GitHub to your local machine.
 
 ### AccessPopup installation
 
-~$
+
     cd AccessPopup
-~$
+
     sudo chmod +x installconfig.sh
-~$
+
     sudo ./installconfig.sh
 
 - *Input 1: Install AccessPopup
