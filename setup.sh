@@ -98,3 +98,28 @@ fi
 # if ! grep -q 'dtoverlay=ov5647' /boot/firmware/config.txt; then
 #   echo 'dtoverlay=ov5647' >> /boot/firmware/config.txt
 # fi
+
+echo "# Configuring IMX500 AI camera for Raspberry Pi 5"
+
+# Checking if the configuration file exists
+if [ ! -f /boot/firmware/config.txt ]; then
+    echo "Error: config.txt not found!"
+    exit 1
+fi
+
+# Adding the basic parameters for the IMX500
+CONFIG_LINES=(
+    "dtoverlay=imx500"
+    "camera_auto_detect=0"
+    "disable_camera_autodetect=1"
+    "gpu_mem=256"  # You may need more memory for the GPU.
+)
+
+for line in "${CONFIG_LINES[@]}"; do
+    if ! grep -q "^${line}" /boot/firmware/config.txt; then
+        echo "Adding: $line"
+        echo "$line" >> /boot/firmware/config.txt
+    else
+        echo "Already exists: $line"
+    fi
+done
