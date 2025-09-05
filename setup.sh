@@ -123,3 +123,76 @@ for line in "${CONFIG_LINES[@]}"; do
         echo "Already exists: $line"
     fi
 done
+
+sudo systemctl disable hciuart.service
+sudo systemctl disable bluetooth.service
+
+
+# Change sources
+if $use_index; then
+  # Backup the original sources.list file
+  if ! [ -e /etc/apt/sources.list.bak ]; then
+    sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+  fi
+
+  # Create a new sources.list file with other mirrors, keeping the release name "bookworm"
+  echo "Updating sources.list with other mirrors..."
+  sudo sh -c 'echo "deb https://mirrors.tuna.tsinghua.edu.cn/debian bookworm main contrib non-free non-free-firmware\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian-security bookworm-security main contrib non-free non-free-firmware\ndeb https://mirrors.tuna.tsinghua.edu.cn/debian bookworm-updates main contrib non-free non-free-firmware" > /etc/apt/sources.list'
+
+
+  if ! [ -e /etc/apt/sources.list.d/raspi.list.bak ]; then
+    sudo cp /etc/apt/sources.list.d/raspi.list /etc/apt/sources.list.d/raspi.list.bak
+  fi
+
+  sudo sh -c 'echo "deb https://mirrors.tuna.tsinghua.edu.cn/raspberrypi bookworm main" > /etc/apt/sources.list.d/raspi.list'
+
+  # Update the package list
+  echo "Updating package list..."
+  sudo apt update
+
+  echo "Done! Your sources.list has been updated with Aliyun mirrors while keeping the release name 'bookworm'."
+else
+  echo "# Using default sources."
+fi
+
+# Install required software
+echo "# Install required software."
+sudo apt update
+sudo apt upgrade -y
+sudo apt install -y libopenblas-dev libatlas3-base libcamera-dev python3-opencv portaudio19-dev
+sudo apt install -y util-linux procps hostapd iproute2 iw haveged dnsmasq iptables espeak
+
+echo "# Create a Python virtual environment."
+# Create a Python virtual environment
+cd $PWD
+python -m venv --system-site-packages ugv-env
+
+echo "# Activate a Python virtual environment."
+
+echo "# Install dependencies from requirements.txt"
+# Install dependencies from requirements.txt
+if $use_index; then
+  sudo -H -u $USER bash -c 'source $PWD/ugv-env/bin/activate && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt && deactivate'
+else
+  sudo -H -u $USER bash -c 'source $PWD/ugv-env/bin/activate && pip install -r requirements.txt && deactivate'
+fi
+
+echo "# Add current user to group so it can use serial."
+sudo usermod -aG dialout $USER
+
+# Audio Config
+echo "# Audio Config."
+sudo cp -v -f /home/$(logname)/ugv_rpi/asound.conf /etc/asound.conf
+
+# OAK Config
+sudo cp -v -f /home/$(logname)/ugv_rpi/99-dai.rules /etc/udev/rules.d/99-dai.rules
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+echo "Setup completed. Please to reboot your Raspberry Pi for the changes to take effect."
+
+echo "Use the command below to run app.py onboot."
+
+echo "sudo chmod +x autorun.sh"
+
+echo "./autorun.sh"
