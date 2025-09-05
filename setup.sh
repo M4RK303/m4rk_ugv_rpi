@@ -59,3 +59,42 @@ is_pifive() {
 # Config cmdline.txt
 sed -i $CMDLINE -e "s/console=ttyAMA0,[0-9]\+ //"
 sed -i $CMDLINE -e "s/console=serial0,[0-9]\+ //"
+
+# Config config.txt
+set_config_var() {
+  lua - "$1" "$2" "$3" <<EOF > "$3.bak"
+local key=assert(arg[1])
+local value=assert(arg[2])
+local fn=assert(arg[3])
+local file=assert(io.open(fn))
+local made_change=false
+for line in file:lines() do
+  if line:match("^#?%s*"..key.."=.*$") then
+    line=key.."="..value
+    made_change=true
+  end
+  print(line)
+end
+
+if not made_change then
+  print(key.."="..value)
+end
+EOF
+mv "$3.bak" "$3"
+}
+
+set_config_var dtparam=uart0 on $CONFIG
+
+# if is_pifive ; then
+#   echo "# pi5: skip step"
+# else
+echo "# Add dtoverlay=disable-bt to /boot/firmware/config.txt"
+if ! grep -q 'dtoverlay=disable-bt' /boot/firmware/config.txt; then
+  echo 'dtoverlay=disable-bt' >> /boot/firmware/config.txt
+fi
+# fi
+
+# echo "# Add dtoverlay=ov5647 to /boot/firmware/config.txt"
+# if ! grep -q 'dtoverlay=ov5647' /boot/firmware/config.txt; then
+#   echo 'dtoverlay=ov5647' >> /boot/firmware/config.txt
+# fi
